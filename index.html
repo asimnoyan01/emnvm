@@ -627,13 +627,13 @@ function fillSummary() {
 function checkKvkk() {
   document.getElementById('btn3').disabled = !document.getElementById('kvkk').checked;
 }
+  
 function submitForm() {
   var ad = document.getElementById('inp-ad').value.trim();
   var soyad = document.getElementById('inp-soyad').value.trim();
   var tel = document.getElementById('inp-tel').value.trim();
   var il = document.getElementById('inp-il').value;
 
-  // 📩 TELEGRAM MESAJI
   var mesaj =
     "📥 YENİ BAŞVURU\n\n" +
     "👤 Ad Soyad: " + ad + " " + soyad + "\n" +
@@ -641,8 +641,8 @@ function submitForm() {
     "📍 İl: " + il + "\n" +
     "📌 Tür: " + selectedType;
 
-  var token = "8473239915:AAF71JLyKRB56m0yEKTnqiSiJu35R5I8Efc";
-  var chat_id = "7217962984";
+  var token = "8473239915:AAF71JLyKRB56m0yEKTnqiSiJu35R5I8Efc";   // ⚠️ frontend'de riskli
+  var chat_id = "-5200324745";      // grup ID
 
   fetch("https://api.telegram.org/bot" + token + "/sendMessage", {
     method: "POST",
@@ -653,20 +653,15 @@ function submitForm() {
       chat_id: chat_id,
       text: mesaj
     })
+  }).catch(function(err){
+    console.log("Telegram hata:", err);
   });
 
-  // UI kısmı (senin mevcut kodun)
+  // success UI
   document.getElementById('ok-name').textContent = ad + ' ' + soyad;
   document.getElementById('ok-tel').textContent = tel;
   document.getElementById('ok-il').textContent = il;
   document.getElementById('ok-tur').textContent = selectedType;
-
-  document.getElementById('progressFill').style.width = '100%';
-  ['dot1','dot2','dot3'].forEach(function(id) {
-    document.getElementById(id).className = 'si-dot done';
-  });
-  document.getElementById('line1').className = 'si-line done';
-  document.getElementById('line2').className = 'si-line done';
 
   document.getElementById('funnelMain').style.display = 'none';
   document.getElementById('successSection').style.display = 'block';
@@ -710,3 +705,5 @@ src="https://www.facebook.com/tr?id=1282590067397012&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 </body>
 </html>
+
+
